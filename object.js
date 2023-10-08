@@ -6,7 +6,7 @@ snake = {
     InternalId: null,
     MoveChange: function(posx,posy,dir){},
     Move: function(){
-    snake.internalId = setInterval(function(){
+    snake.InternalId = setInterval(function(){
     snake.MoveChange(snake.posx,snake.posy,snake.dir)
         },snake.speed)
   
@@ -18,4 +18,6 @@ snake = {
 
 food = {
     posx:[100],
-    posy:[100]}
+    posy:[100],
+    NewFood:function(){}
+}

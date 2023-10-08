@@ -1,80 +1,105 @@
 const BtnStart = document.getElementById("start");
 const Area = document.getElementById("A1");
 let SnakeHead = document.getElementById("S1");
-/*let B1 = document.getElementById("B1");
-let B2 = document.getElementById("B2");
-let B3 = document.getElementById("B3");
-let B4 = document.getElementById("B4");*/
 let Sdraw = [SnakeHead];
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function colide(usx,usy,ufx,ufy){
+    if((Math.abs(usx-ufx)<17) && Math.abs(usy-ufy)<17){
+        return true;
+    }
+}
+food.NewFood = function(){
+    food.posx[0] =  getRandomInt(2,((Area.offsetWidth)/10 - 30))*10;
+    food.posy[0] =  getRandomInt(2,((Area.offsetHeight)/10 - 30))*10;
+    Create(food.posx[0],0,"food");
+}
+
+function Lost(){
+    snake.Stops();
+    BtnStart.removeAttribute('hidden');
+    snake.posx[0]= parseInt((Area.offsetWidth/2));
+    snake.posy[0]= parseInt((Area.offsetHeight/2));
+}
+
 function MoveSnake(){
     const largo = snake.posx.length;
     const headx = snake.posx[0];
     const heady = snake.posy[0];
-    /*const colf = colide(snake.posx[0],snake.posy[0],food.posx[0],food.posy[0])
-    if(colf == true){
+    const DivFood = document.getElementById("f1");
+    const ArrayFood = [DivFood];
+    const colf = colide(snake.posx[0],snake.posy[0],food.posx[0],food.posy[0]);
+    if(colf){
         snake.posx.push(snake.posx[largo-1]);
         snake.posy.push(snake.posy[largo-1]);
-        food.posx[0] =  getRandomInt(2,48)*10
-        food.posy[0] =  getRandomInt(2,48)*10
-        snake.speed = 60 + 200 - (largo*5)
-        score = score + 50 
-        snake.stops()
-        snake.move()
-    }*/
+        food.NewFood();
+        snake.speed = 200 - (largo*2);
+        Delete(ArrayFood);
+        //score = score + 50;
+        snake.Stops();
+        //DrawSnake();
+        snake.Move();
+    }
+    let lost = false;
     for(i=largo-1;i>0;i--){
-        /*var lost = colide(snake.posx[0],snake.posy[0],snake.posx[i],snake.posy[i])
-        if (lost == true){
-            snake.stops()
-            ctx.shadowColor ='#ff0000';
-            ctx.font = "75px Arial";
-            ctx.fillText("Game Over",250,258)
-            btnStart.removeAttribute('hidden')
-            }else{*/
+        lost = colide(snake.posx[0],snake.posy[0],snake.posx[i],snake.posy[i]);
+        if(lost){
+            Lost();
+            Delete(ArrayFood);
+            break;
+        }else{
         snake.posx[i]=snake.posx[i-1];
-        snake.posy[i]=snake.posy[i-1];
+        snake.posy[i]=snake.posy[i-1];}
     }
 
     const Limitx = Area.offsetWidth - 10;
     const LimitY = Area.offsetHeight - 20;
-    switch (snake.dir)
-        {
-            case "left":
-                if(snake.posx[0] < 20){snake.posx[0] = Limitx;
-                }else{snake.posx[0] = headx-20;}
-                break           
-            case "right":
-                if(snake.posx[0] > Limitx){snake.posx[0] = 0;
-                }else{snake.posx[0] = 20 + headx;}
-                break                                  
-            case "up":
-                if(snake.posy[0] < 10){snake.posy[0] = LimitY;
-                }else{snake.posy[0] = heady-20;}
-                break                          
-            case "down":
-                if(snake.posy[0] > LimitY){snake.posy[0] = 0;
-                }else{snake.posy[0] = heady+20;}
-                break
-        }      
+    if(lost){
+    }else{
+        switch (snake.dir)
+            {
+                case "left":
+                    if(snake.posx[0] < 20){snake.posx[0] = Limitx;
+                    }else{snake.posx[0] = headx-20;}
+                    break           
+                case "right":
+                    if(snake.posx[0] > Limitx){snake.posx[0] = 0;
+                    }else{snake.posx[0] = 20 + headx;}
+                    break                                  
+                case "up":
+                    if(snake.posy[0] < 10){snake.posy[0] = LimitY;
+                    }else{snake.posy[0] = heady-20;}
+                    break                          
+                case "down":
+                    if(snake.posy[0] > LimitY){snake.posy[0] = 0;
+                    }else{snake.posy[0] = heady+20;}
+                    break
+            }
+    }     
         //labelscore.innerText = score.toString()
 }
 
-function Create(item, index){
+function Create(item, index, drawelement){
     let DivS = document.createElement("div");
-    if(index === 0){
-        DivS.setAttribute("class","SnakeHead");
-        DivS.setAttribute("id","S1");
+    if (drawelement==="Snake"){
+        if(index === 0){
+            DivS.setAttribute("class","SnakeHead");
+            DivS.setAttribute("id","S1");
+        }else{
+            DivS.setAttribute("class","SnakeBody");
+            DivS.setAttribute("id",'B'+index);       
+        }
+        DivS.style.top = snake.posy[index]+'px';
+        Sdraw[index] = DivS; 
     }else{
-        DivS.setAttribute("class","SnakeBody");
-        DivS.setAttribute("id",'B'+index);    
+        DivS.setAttribute("class","food");
+        DivS.setAttribute("id","f1");
+        DivS.style.top = food.posy[index]+'px';
     }
-    Sdraw[index] = DivS;
     DivS.style.left = item+'px';
-    DivS.style.top = snake.posy[index]+'px';
     Area.appendChild(DivS);
 }
 
@@ -82,13 +107,13 @@ function DrawSnake(){
     const Snx = snake.posx;
     for(i=0;i<Snx.length;i++)
     {
-        Create(Snx[i],i);
+        Create(Snx[i],i,"Snake");
     }
     //Snx.forEach(Create());
 }
 
-function DeleteSnake(){
-    Sdraw.forEach((e) => {
+function Delete(DelElement){
+    DelElement.forEach((e) => {
         const DivE = e;
         DivE.parentNode.removeChild(DivE);
     });
@@ -96,7 +121,7 @@ function DeleteSnake(){
 
 
 snake.MoveChange = function (posx,posy,dir){
-    DeleteSnake();
+    Delete(Sdraw);
     MoveSnake();
     DrawSnake();
  }
@@ -105,16 +130,16 @@ const changedir = (e) => {
     console.log(e)
 
     switch (e.key) {
-        case ("a"||"ArrowLeft"):
+        case ("a"):
            if(snake.dir != "right"){snake.dir="left"}
             return
-        case ("s"||"ArrowDown"):
+        case ("s"):
             if(snake.dir != "up"){snake.dir="down"}
             return
-        case ("d"||"ArrowRight"):
+        case ("d"):
             if(snake.dir != "left"){snake.dir="right"}
             return
-        case ("w"||'ArrowUp'):
+        case ("w"):
             if(snake.dir != "down"){snake.dir="up"}
             return
     }
@@ -122,15 +147,16 @@ const changedir = (e) => {
 
 
 function startgame(){
-
+    SnakeHead = document.getElementById("S1");
     snake.posx[0]=SnakeHead.offsetLeft;
     snake.posy[0]=SnakeHead.offsetTop;
     for (i=1; i<5;i++){
-        snake.posx[i] = snake.posx[i-1] - 20;
-        snake.posy[i]=SnakeHead.offsetTop;
+        snake.posx[i] = snake.posx[i-1] - 17;
+        snake.posy[i]= SnakeHead.offsetTop;
     }
-    DeleteSnake();
+    Delete(Sdraw);
     DrawSnake();
+    food.NewFood();
     snake.speed=200;
     snake.dir="right";
     snake.Move();
