@@ -22,11 +22,11 @@
     width: 20px;
     background-color:aqua;
     border-radius: 50%;
+    position: absolute;
 }
 #B1,#B2,#B3,#B4{
-    position: absolute;
     top: 50vh;
-    left: 50vw;
+
 }
 button{
     background-color: #333333;
