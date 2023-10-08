@@ -1,20 +1,20 @@
 const BtnStart = document.getElementById("start");
 const Area = document.getElementById("A1");
 let SnakeHead = document.getElementById("S1");
-let B1 = document.getElementById("B1");
+/*let B1 = document.getElementById("B1");
 let B2 = document.getElementById("B2");
 let B3 = document.getElementById("B3");
-let B4 = document.getElementById("B4");
-let Sdraw = [SnakeHead,B1,B2,B3,B4];
+let B4 = document.getElementById("B4");*/
+let Sdraw = [SnakeHead];
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function MoveSnake(){
-    const largo = snake.posx.length
-    const headx = snake.posx[0]
-    const heady = snake.posy[0]
+    const largo = snake.posx.length;
+    const headx = snake.posx[0];
+    const heady = snake.posy[0];
     /*const colf = colide(snake.posx[0],snake.posy[0],food.posx[0],food.posy[0])
     if(colf == true){
         snake.posx.push(snake.posx[largo-1]);
@@ -40,7 +40,7 @@ function MoveSnake(){
     }
 
     const Limitx = Area.offsetWidth - 10;
-    const LimitY = Area.offsetHeight - 10;
+    const LimitY = Area.offsetHeight - 20;
     switch (snake.dir)
         {
             case "left":
@@ -67,7 +67,7 @@ function Create(item, index){
     let DivS = document.createElement("div");
     if(index === 0){
         DivS.setAttribute("class","SnakeHead");
-        DivS.setAttribute("id","S1")
+        DivS.setAttribute("id","S1");
     }else{
         DivS.setAttribute("class","SnakeBody");
         DivS.setAttribute("id",'B'+index);    
@@ -84,12 +84,10 @@ function DrawSnake(){
     {
         Create(Snx[i],i);
     }
-    console.log(Snx);
     //Snx.forEach(Create());
 }
 
 function DeleteSnake(){
-    console.log(Sdraw);
     Sdraw.forEach((e) => {
         const DivE = e;
         DivE.parentNode.removeChild(DivE);
@@ -107,16 +105,16 @@ const changedir = (e) => {
     console.log(e)
 
     switch (e.key) {
-        case "a":
+        case ("a"||"ArrowLeft"):
            if(snake.dir != "right"){snake.dir="left"}
             return
-        case "s":
+        case ("s"||"ArrowDown"):
             if(snake.dir != "up"){snake.dir="down"}
             return
-        case "d":
+        case ("d"||"ArrowRight"):
             if(snake.dir != "left"){snake.dir="right"}
             return
-        case "w":
+        case ("w"||'ArrowUp'):
             if(snake.dir != "down"){snake.dir="up"}
             return
     }
@@ -124,26 +122,19 @@ const changedir = (e) => {
 
 
 function startgame(){
-    //const InitPos = SnakeHead.getBoundingClientRect();
-    B1.style.left = (SnakeHead.offsetLeft-20)+'px';
-    B2.style.left = (B1.offsetLeft-20)+'px';
-    B3.style.left = (B2.offsetLeft-20)+'px';
-    B4.style.left = (B3.offsetLeft-20)+'px';
-    snake.posx[0] = SnakeHead.offsetLeft;
-    snake.posx[1] = B1.offsetLeft;
-    snake.posx[2] = B2.offsetLeft;
-    snake.posx[3] = B3.offsetLeft;
-    snake.posx[4] = B4.offsetLeft;
-    snake.posy[0] = SnakeHead.offsetTop;
-    snake.posy[1] = B1.offsetTop;
-    snake.posy[2] = B2.offsetTop;
-    snake.posy[3] = B3.offsetTop;
-    snake.posy[4] = B4.offsetTop;
+
+    snake.posx[0]=SnakeHead.offsetLeft;
+    snake.posy[0]=SnakeHead.offsetTop;
+    for (i=1; i<5;i++){
+        snake.posx[i] = snake.posx[i-1] - 20;
+        snake.posy[i]=SnakeHead.offsetTop;
+    }
     DeleteSnake();
     DrawSnake();
     snake.speed=200;
     snake.dir="right";
-    snake.Move()
+    snake.Move();
+    BtnStart.setAttribute('hidden',true);
 }
 
 

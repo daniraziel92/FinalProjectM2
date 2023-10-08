@@ -1,8 +1,10 @@
+body{
+    background-color:#333333;   
+}
 .SnakeArea{
     height: 80vh;
     width: 99vw;
-    border-color: aqua;
-    border: solid 1px;
+    border: solid 10px aqua;
     display: flex;
     
 }
@@ -12,7 +14,6 @@
     position: absolute;
     top: 50vh;
     left: 50vw;
-    /*margin: 240px 240px 240px 240px;*/
     background-color: red;
     border-radius: 50%;
 
@@ -24,10 +25,7 @@
     border-radius: 50%;
     position: absolute;
 }
-#B1,#B2,#B3,#B4{
-    top: 50vh;
 
-}
 button{
     background-color: #333333;
 	border-color: #28d1fa;
