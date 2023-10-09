@@ -1,6 +1,8 @@
 const BtnStart = document.getElementById("start");
 const Area = document.getElementById("A1");
 let SnakeHead = document.getElementById("S1");
+const labelscore = document.getElementById("scorev");
+let score = 0;
 let Sdraw = [SnakeHead];
 
 function getRandomInt(min, max) {
@@ -23,6 +25,10 @@ function Lost(){
     BtnStart.removeAttribute('hidden');
     snake.posx[0]= parseInt((Area.offsetWidth/2));
     snake.posy[0]= parseInt((Area.offsetHeight/2));
+    snake.posx.length = 5;
+    snake.posy.length = 5;
+    Sdraw.length = 5;
+    console.log(snake.posx);
 }
 
 function MoveSnake(){
@@ -38,7 +44,8 @@ function MoveSnake(){
         food.NewFood();
         snake.speed = 200 - (largo*2);
         Delete(ArrayFood);
-        //score = score + 50;
+        score = score + 50;
+        labelscore.innerText = score.toString();
         snake.Stops();
         //DrawSnake();
         snake.Move();
@@ -88,6 +95,20 @@ function Create(item, index, drawelement){
         if(index === 0){
             DivS.setAttribute("class","SnakeHead");
             DivS.setAttribute("id","S1");
+            switch(snake.dir){
+                case "left":
+                    DivS.style.transform = "rotate(90deg)";
+                    break;
+                case "right":
+                    DivS.style.transform = "rotate(-90deg)";
+                    break;
+                case "up":
+                    DivS.style.transform = "rotate(180deg)";
+                    break;
+                default:
+                    DivS.style.transform = "rotate(0deg)";
+                    break;
+            }
         }else{
             DivS.setAttribute("class","SnakeBody");
             DivS.setAttribute("id",'B'+index);       
@@ -147,6 +168,7 @@ const changedir = (e) => {
 
 
 function startgame(){
+    score = 0;
     SnakeHead = document.getElementById("S1");
     snake.posx[0]=SnakeHead.offsetLeft;
     snake.posy[0]=SnakeHead.offsetTop;
@@ -162,10 +184,6 @@ function startgame(){
     snake.Move();
     BtnStart.setAttribute('hidden',true);
 }
-
-
-
-
 
 
 BtnStart.addEventListener("click",()=>startgame());
