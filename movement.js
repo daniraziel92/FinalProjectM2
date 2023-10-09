@@ -24,8 +24,10 @@ food.NewFood = function(){
 function Lost(){
     snake.Stops();
     BtnStart.removeAttribute('hidden');
-    Img1.removeAttribute('hidden');
     Img1.setAttribute("src","./img/snakedead.png");
+    Img1.removeAttribute('hidden');
+    document.getElementById("Name1").innerText = "GAME OVER";
+    document.getElementById("Name1").style.color = "Red";
     snake.posx[0]= parseInt((Area.offsetWidth/2));
     snake.posy[0]= parseInt((Area.offsetHeight/2));
     snake.posx.length = 5;
