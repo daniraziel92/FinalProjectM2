@@ -1,10 +1,22 @@
 body{
     background-color:#333333;   
 }
+.Banner{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+.name{
+    color:#588841;
+	font-size: 8vh;
+	font-weight: 600;
+}
+.instructions{
+    margin-top: 10px;
+    height: 14vh;
+}
 .buttons{
     display: flex;
-    height: 10vh;
-    width: 100vw;
     justify-content: center;
 }
 .Controls{
@@ -21,9 +33,15 @@ body{
 	font-weight: 600;
     
 }
-.SnakeArea{
+.MainImg{
     height: 80vh;
-    width: 99vw;
+    z-index: 2;
+}
+.SnakeArea{
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+    width: 98vw;
     border: solid 10px aqua;
     display: flex;
     
@@ -53,8 +71,9 @@ body{
     height: 20px;
     width: 20px;
     position: absolute;
-    background-color:brown;
-    border-radius: 50%;
+    background-image: url("./img/food.png");
+    background-size: 30px 30px;
+    background-position: center;
 }
 
 button{

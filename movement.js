@@ -2,6 +2,7 @@ const BtnStart = document.getElementById("start");
 const Area = document.getElementById("A1");
 let SnakeHead = document.getElementById("S1");
 const labelscore = document.getElementById("scorev");
+const Img1 = document.getElementById("Img1");
 let score = 0;
 let Sdraw = [SnakeHead];
 
@@ -23,12 +24,15 @@ food.NewFood = function(){
 function Lost(){
     snake.Stops();
     BtnStart.removeAttribute('hidden');
+    Img1.removeAttribute('hidden');
+    Img1.setAttribute("src","./img/snakedead.png");
     snake.posx[0]= parseInt((Area.offsetWidth/2));
     snake.posy[0]= parseInt((Area.offsetHeight/2));
     snake.posx.length = 5;
     snake.posy.length = 5;
     Sdraw.length = 5;
-    console.log(snake.posx);
+    
+
 }
 
 function MoveSnake(){
@@ -169,6 +173,7 @@ const changedir = (e) => {
 
 function startgame(){
     score = 0;
+    
     SnakeHead = document.getElementById("S1");
     snake.posx[0]=SnakeHead.offsetLeft;
     snake.posy[0]=SnakeHead.offsetTop;
@@ -182,6 +187,7 @@ function startgame(){
     snake.speed=200;
     snake.dir="right";
     snake.Move();
+    Img1.setAttribute('hidden',true);
     BtnStart.setAttribute('hidden',true);
 }
 
