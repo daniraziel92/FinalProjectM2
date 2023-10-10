@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Styless.css"/>
-    <title>Proyecto Final Modulo 2</title>
-</head>
-<body>
-    <div class="SnakeArea" id = "A1">
-        <div class="SnakeHead" id ="S1">
+    <head>
+        <meta charset="UTF-8">
+        <meta Name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./styless.css"/>
+        <title>Proyecto Final Modulo 2</title>
+    </head>
+    <body>
+        <div class="SnakeArea" id = "Area1">
+            <div class="SnakeHead" id ="Snake1">
+            </div>
+            <img class ="MainImg" src="./img/head.png" id="Imagen1"/> 
         </div>
-        <img class ="MainImg" src="./img/head.png" id="Img1"/> 
-    </div>
-    <div class="Banner">
-    <div class="name" id="Name1">SNAKE</div>
-    <div class="Controls">
-        <div class="buttons">
-            <button id="start">Start Game</button>
+        <div class="Banner">
+            <div class="Name" id="Name1">SNAKE</div>
+            <div class="Controls">
+                <div class="Buttons">
+                    <button id="Start">Start Game</button>
+                </div>
+                <div class="Labels">
+                    <label class="Score">Score :</label><label class="Score" id="ScoreValue">0</label>
+                </div>
+            </div>
+            <img class="Instructions" src="./img/paddle.png"/>
         </div>
-        <div class="labels">
-            <label class="score">Score :</label><label class="score" id="scorev">0</label>
-        </div>
-    </div>
-    <img class="instructions" src="./img/paddle.png"/>
-    </div>
-    
-    <script src="./object.js"></script>
-    <script src="./movement.js"></script>
-</body>
+        <script type="text/javascript" src="./object.js"></script>
+        <script type="text/javascript" src="./movement.js"></script>
+    </body>
 </html>
