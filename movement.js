@@ -40,7 +40,7 @@ function moveSnake(){
     const limitY = area.offsetHeight - 20;
     const snakeLength = snake.posX.length;
     const headX = snake.posX[0];
-    const headY= snake.posY[0];
+    const headY = snake.posY[0];
     const divFood = document.getElementById("Food1");
     const arrayFood = [divFood];
     const colf = colide(snake.posX[0], snake.posY[0], food.posX[0], food.posY[0]);
@@ -104,7 +104,7 @@ function moveSnake(){
 
 function create(item, index, drawElement){
     let newDiv = document.createElement("div");
-    if (drawElement==="Snake") {
+    if (drawElement === "Snake") {
         if(index === 0) {
             newDiv.setAttribute("class", "SnakeHead");
             newDiv.setAttribute("id", "Snake1");
@@ -125,14 +125,14 @@ function create(item, index, drawElement){
             newDiv.setAttribute("class", "SnakeBody");
             newDiv.setAttribute("id", 'Body' + index);       
         }
-        newDiv.style.top = snake.posY[index]+'px';
+        newDiv.style.top = snake.posY[index] + 'px';
         snakeDivs[index] = newDiv; 
     }else{
         newDiv.setAttribute("class", "Food");
         newDiv.setAttribute("id", "Food1");
-        newDiv.style.top = food.posY[index]+'px';
+        newDiv.style.top = food.posY[index] + 'px';
     }
-    newDiv.style.left = item+'px';
+    newDiv.style.left = item + 'px';
     area.appendChild(newDiv);
 }
 
@@ -160,22 +160,22 @@ const changeDir = (e) => {
     switch (e.key) {
         case ("a"):
             if(snake.dir !== "right"){
-                snake.dir="left";
+                snake.dir = "left";
             }
         break;
         case ("s"):
             if(snake.dir !== "up"){
-                snake.dir="down";
+                snake.dir = "down";
             }
         break;
         case ("d"):
             if(snake.dir !== "left"){
-                snake.dir="right";
+                snake.dir = "right";
             }
         break;
         case ("w"):
             if(snake.dir !== "down"){
-                snake.dir="up";
+                snake.dir = "up";
             }
         break;
     }
