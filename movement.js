@@ -200,6 +200,5 @@ function startGame(){
     BtnStart.setAttribute('hidden', true);
 }
 
-
 BtnStart.addEventListener("click", ()=>startGame());
 addEventListener('keyup', changeDir);
