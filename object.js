@@ -13,10 +13,10 @@ const snake = {
     stops: function () {
         clearInterval(snake.internalId)
         }
-}
+};
 
 const food = {
     posX:[100],
     posY:[100],
     newFood:function(){}
-}
+};
