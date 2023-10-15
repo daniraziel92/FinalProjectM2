@@ -37,7 +37,7 @@ function lostGame(){
 
 function moveSnake(){
     const limitX = area.offsetWidth - 10;
-    const limitY = area.offsetHeight - 20;
+    const limitY = area.offsetHeight - 10;
     const snakeLength = snake.posX.length;
     const headX = snake.posX[0];
     const headY = snake.posY[0];
@@ -79,7 +79,7 @@ function moveSnake(){
                 break;          
                 case "right":
                     if(snake.posX[0] > limitX){
-                        snake.posX[0] = 0;
+                        snake.posX[0] = 20;
                     }else{
                         snake.posX[0] = 20 + headX;
                     }
@@ -93,7 +93,7 @@ function moveSnake(){
                 break;                          
                 case "down":
                     if(snake.posY[0] > limitY){
-                        snake.posY[0] = 0;
+                        snake.posY[0] = 20;
                     }else{
                         snake.posY[0] = headY + 20;
                     }
