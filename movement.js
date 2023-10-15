@@ -184,6 +184,8 @@ const changeDir = (e) => {
 function startGame(){
     score = 0;
     snakeHead = document.getElementById("snake1");
+    document.getElementById("name1").innerText = "snake";
+    document.getElementById("name1").style.color = "#588841";
     snake.posX[0] = snakeHead.offsetLeft;
     snake.posY[0] = snakeHead.offsetTop;
     for (let i = 1; i < 5; i++){
