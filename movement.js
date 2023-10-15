@@ -24,7 +24,7 @@ food.newFood = function(){
 function lostGame(){
     snake.stops();
     btnstart.removeAttribute('hidden');
-    img1.setAttribute("src","./img/snakedead.png");
+    img1.setAttribute("src","./img/snakeDead.png");
     img1.removeAttribute('hidden');
     document.getElementById("name1").innerText = "game over";
     document.getElementById("name1").style.color = "Red";
