@@ -1,8 +1,8 @@
-const btnStart = document.getElementById("Start");
-const area = document.getElementById("Area1");
-let snakeHead = document.getElementById("Snake1");
-const labelScore = document.getElementById("ScoreValue");
-const img1 = document.getElementById("Imagen1");
+const btnstart = document.getElementById("start");
+const area = document.getElementById("area1");
+let snakeHead = document.getElementById("snake1");
+const  labelScore = document.getElementById("scoreValue");
+const img1 = document.getElementById("imagen1");
 let score = 0;
 const snakeDivs = [snakeHead];
 
@@ -17,17 +17,17 @@ function colide(usx, usy, ufx, ufy){
 }
 food.newFood = function(){
     food.posX[0] =  getRandomInt(2,((area.offsetWidth) / 10 - 30 )) * 10;
-    food.posY[0] =  getRandomInt(2,((area.offsetHeight) / 10 - 30 )) * 10;
+    food.posY[0] =  getRandomInt(2,((area.offsetHeight) / 10 - 5 )) * 10;
     create(food.posX[0], 0, "food");
 }
 
 function lostGame(){
     snake.stops();
-    btnStart.removeAttribute('hidden');
+    btnstart.removeAttribute('hidden');
     img1.setAttribute("src","./img/snakedead.png");
     img1.removeAttribute('hidden');
-    document.getElementById("Name1").innerText = "GAME OVER";
-    document.getElementById("Name1").style.color = "Red";
+    document.getElementById("name1").innerText = "game over";
+    document.getElementById("name1").style.color = "Red";
     snake.posX[0]= parseInt((area.offsetWidth/2));
     snake.posY[0]= parseInt((area.offsetHeight/2));
     snake.posX.length = 5;
@@ -41,15 +41,15 @@ function moveSnake(){
     const snakeLength = snake.posX.length;
     const headX = snake.posX[0];
     const headY = snake.posY[0];
-    const divFood = document.getElementById("Food1");
-    const arrayFood = [divFood];
-    const colidef = colide(snake.posX[0], snake.posY[0], food.posX[0], food.posY[0]);
+    const divfood = document.getElementById("food1");
+    const arrayFood = [divfood];
+    const colideConfirm = colide(snake.posX[0], snake.posY[0], food.posX[0], food.posY[0]);
     let lost = false;
-    if(colidef) {
+    if(colideConfirm) {
         snake.posX.push(snake.posX[snakeLength - 1]);
         snake.posY.push(snake.posY[snakeLength - 1]);
         food.newFood();
-        snake.speed = 200 - (snakeLength * 2);
+        snake.speed = 200 - (snakeLength * 7);
         deleteDiv(arrayFood);
         score = score + 50;
         labelScore.innerText = score.toString();
@@ -85,7 +85,7 @@ function moveSnake(){
                     }
                 break;                                
                 case "up":
-                    if(snake.posY[0] < 10){
+                    if(snake.posY[0] < 20){
                         snake.posY[0] = limitY;
                     }else{
                         snake.posY[0] = headY - 20;
@@ -104,10 +104,10 @@ function moveSnake(){
 
 function create(item, index, drawElement){
     let newDiv = document.createElement("div");
-    if (drawElement === "Snake") {
+    if (drawElement === "snake") {
         if(index === 0) {
-            newDiv.setAttribute("class", "SnakeHead");
-            newDiv.setAttribute("id", "Snake1");
+            newDiv.setAttribute("class", "snakeHead");
+            newDiv.setAttribute("id", "snake1");
             switch(snake.dir){
                 case "left":
                     newDiv.style.transform = "rotate(90deg)";
@@ -122,14 +122,14 @@ function create(item, index, drawElement){
                     newDiv.style.transform = "rotate(0deg)";
             }
         }else{
-            newDiv.setAttribute("class", "SnakeBody");
-            newDiv.setAttribute("id", 'Body' + index);       
+            newDiv.setAttribute("class", "snakeBody");
+            newDiv.setAttribute("id", 'body' + index);       
         }
         newDiv.style.top = snake.posY[index] + 'px';
         snakeDivs[index] = newDiv; 
     }else{
-        newDiv.setAttribute("class", "Food");
-        newDiv.setAttribute("id", "Food1");
+        newDiv.setAttribute("class", "food");
+        newDiv.setAttribute("id", "food1");
         newDiv.style.top = food.posY[index] + 'px';
     }
     newDiv.style.left = item + 'px';
@@ -139,7 +139,7 @@ function create(item, index, drawElement){
 function drawSnake(){
     const snx = snake.posX;
     for(let i = 0;i < snx.length; i++) {
-        create(snx[i], i, "Snake");
+        create(snx[i], i, "snake");
     }
 }
 
@@ -183,7 +183,7 @@ const changeDir = (e) => {
 
 function startGame(){
     score = 0;
-    snakeHead = document.getElementById("Snake1");
+    snakeHead = document.getElementById("snake1");
     snake.posX[0] = snakeHead.offsetLeft;
     snake.posY[0] = snakeHead.offsetTop;
     for (let i = 1; i < 5; i++){
@@ -197,8 +197,8 @@ function startGame(){
     snake.dir = "right";
     snake.move();
     img1.setAttribute('hidden', true);
-    btnStart.setAttribute('hidden', true);
+    btnstart.setAttribute('hidden', true);
 }
 
-btnStart.addEventListener("click", ()=>startGame());
+btnstart.addEventListener("click", ()=> startGame());
 addEventListener('keyup', changeDir);
