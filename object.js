@@ -4,7 +4,7 @@ const snake = {
     speed:200,
     dir:"right",
     internalId: null,
-    moveChange: function(posX,posY,dir){},
+    moveChange: function(){},
     move: function(){
         snake.internalId = setInterval(function(){
             snake.moveChange(snake.posX,snake.posY,snake.dir)

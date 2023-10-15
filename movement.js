@@ -150,7 +150,7 @@ function deleteDiv(delElement){
     });
 }
 
-snake.moveChange = function (posX,posY,dir){
+snake.moveChange = function (){
     deleteDiv(snakeDivs);
     moveSnake();
     drawSnake();
@@ -179,6 +179,7 @@ const changeDir = (e) => {
             }
         break;
     }
+    snake.moveChange();
 }
 
 function startGame(){
